@@ -46,6 +46,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: .net-app
+      
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_SECRET }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -53,5 +58,5 @@ jobs:
         with:
           app-name: 'my-test-appservice'
           #slot-name: 'Production'
-          publish-profile: ${{ secrets.TEST_APP_PUBLISH_PROFILE }}
+          #publish-profile: ${{ secrets.TEST_APP_PUBLISH_PROFILE }}
           package: .
